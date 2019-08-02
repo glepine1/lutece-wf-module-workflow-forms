@@ -33,7 +33,10 @@
  */
 package fr.paris.lutece.plugins.workflow.modules.forms.business;
 
+import fr.paris.lutece.plugins.workflowcore.business.config.ITaskConfig;
 import fr.paris.lutece.plugins.workflowcore.business.config.TaskConfig;
+
+import java.util.Map;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -91,4 +94,14 @@ public class ResubmitFormResponseTaskConfig extends TaskConfig
     {
         return _strDefaultMessage;
     }
+    
+    @Override
+	public ITaskConfig copyConfigWithNewStates( Map<Integer, Integer> mapNewStates )
+    {
+		if ( mapNewStates != null )
+		{
+			_nIdStateAfterEdition = mapNewStates.getOrDefault( _nIdStateAfterEdition, _nIdStateAfterEdition );
+		}
+		return this;
+	}
 }
